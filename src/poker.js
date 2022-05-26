@@ -20,8 +20,8 @@ class Poker {
     if (firstTotal === secondTotal) {
       return [];
     } else {
-      const firstNewScore = Math.floor(firstTotal / firstUnique)
-      const secondNewScore = Math.floor(secondTotal / secondUnique)
+      const firstNewScore = Math.floor(firstTotal / firstUnique.length)
+      const secondNewScore = Math.floor(secondTotal / secondUnique.length)
       
       if (firstNewScore > secondNewScore) {
         
@@ -54,9 +54,9 @@ class Poker {
       return sum + score
     }, 0);
     console.log('totalScore '+totalScore);
-    const uniquePairLength = uniquePair.length;
+    
 
-    return { array:convertArray,total: totalScore, uniquePair: uniquePairLength }
+    return { array:convertArray,total: totalScore, uniquePair: uniquePair}
   }
   winningPairFromArray(multipleArray){
 
@@ -71,7 +71,7 @@ class Poker {
       uniqueValue = callTotalScore.uniquePair;
       total = callTotalScore.total;
       newTotal = Math.floor(total / uniqueValue.length);
-      
+      console.log(callTotalScore,uniqueValue,total,newTotal);
       result.push(total,newTotal);
      
     }
