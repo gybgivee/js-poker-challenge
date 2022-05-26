@@ -10,7 +10,7 @@ class Poker {
     console.log('Result: ' + result + ' lenght ' + result.length)
 
     console.log('finalResult :' + finalResult)
-    return finalResult
+    return finalResult;
   }
   winningPairFromArray(multipleArray) {
     let result = this.getFinalResult(multipleArray)

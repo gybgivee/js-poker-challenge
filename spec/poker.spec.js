@@ -7,7 +7,7 @@ describe('Poker', () => {
 
     const result = poker.winningPair(['K', '3'], ['A', 'A'])
 
-    expect(result).toEqual(['A', 'A'])
+    expect(result).toEqual([['A', 'A']])
   })
 
   it("should return [] for ['J', 'Q'] and ['3', '7']", () => {
@@ -15,7 +15,7 @@ describe('Poker', () => {
 
     const result = poker.winningPair(['J', 'Q'], ['3', '7'])
 
-    expect(result).toEqual([])
+    expect(result).toEqual([[]])
   })
 
   it("should return ['9', '9'] for ['9', '9'] and ['7', '7']", () => {
@@ -23,6 +23,6 @@ describe('Poker', () => {
 
     const result = poker.winningPair(['9', '9'], ['7', '7'])
 
-    expect(result).toEqual(['9', '9'])
+    expect(result).toEqual([['9', '9']])
   })
 })
