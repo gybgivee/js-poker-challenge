@@ -23,6 +23,8 @@ describe('Poker', () => {
 
     const result = poker.winningPairFromArray([['4', '3'], ['6', '2'], ['7', '1'], ['3', '9']])
 
-    expect(result).toEqual([])
+    expect(result).toEqual(['6', '2'], ['7', '1'],)
+    //expect(result).toEqual([])
+
   })
 })
