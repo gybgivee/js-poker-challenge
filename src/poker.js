@@ -2,26 +2,26 @@ class Poker {
   constructor(array) {
     this.array = array
   }
-  winningPair(originArray1, originArray2) {
-    let multipleArray = [originArray1, originArray2]
-    let result = this.getFinalResult(multipleArray)
+  winningPair(firstPlayer, secondPlayer) {
 
-    let finalResult = this.getConditionalResult(result, multipleArray)
-    console.log('Result: ' + result + ' lenght ' + result.length)
+    let multiplePlayer = [firstPlayer, secondPlayer];
+    let result = this.getFinalResult(multiplePlayer);
 
-    console.log('finalResult :' + finalResult)
+    let finalResult = this.getConditionalResult(result, multiplePlayer);
+    console.log('Result: ' + result + ' lenght ' + result.length);
+    console.log('finalResult :' + finalResult);
     return finalResult;
   }
-  winningPairFromArray(multipleArray) {
-    let result = this.getFinalResult(multipleArray)
-    let finalResult = this.getConditionalResult(result, multipleArray)
+  winningPairFromArray(multiplePlayer) {
+    let result = this.getFinalResult(multiplePlayer)
+    let finalResult = this.getConditionalResult(result, multiplePlayer)
     console.log('Result: ' + result + ' lenght ' + result.length)
     console.log('finalResult :' + finalResult)
     return finalResult
   }
-  winning3CardHand(multipleArray) {
-    let result = this.getFinalResult(multipleArray)
-    let finalResult = this.getConditionalResult(result, multipleArray);
+  winning3CardHand(multiplePlayer) {
+    let result = this.getFinalResult(multiplePlayer)
+    let finalResult = this.getConditionalResult(result, multiplePlayer);
     console.log('finalResult :' + finalResult);
     let modifiedResult = [];
     let sizeResult = finalResult[0].length;
@@ -40,10 +40,12 @@ class Poker {
     console.log(modifiedResult);
     return modifiedResult;
   }
-  getTotalScore(convertArray) {
+
+  getTotalScore(cardOfArray) {
+
     const pokerRules = ['J', 'Q', 'K', 'A']
 
-    let result = [...convertArray]
+    let result = JSON.parse(JSON.stringify(cardOfArray));
 
     const highestScore = 10;
     let sum = 0;
@@ -52,53 +54,51 @@ class Poker {
     for (let i = 0; i < result.length; i++) {
       sum = 0
       for (let j = 0; j < pokerRules.length; j++) {
-        if (convertArray[i] === pokerRules[j]) {
+        if (cardOfArray[i] === pokerRules[j]) {
           if (j === lastIndex) {
-            sum = highestScore + 11
-            result[i] = sum
+            sum = highestScore + 11;
+            result[i] = sum;
           } else {
-            result[i] = highestScore
+            result[i] = highestScore;
           }
 
-          console.log('result :' + result)
-          console.log('convertArray :' + convertArray[i])
         }
       }
     }
     const uniquePair = [...new Set(result)].map(Number)
-    console.log('uniquePair :', uniquePair)
+    
     let totalScore = uniquePair.reduce(function (sum, score) {
       return sum + score
     }, 0)
     if (totalScore > highestScore) {
       totalScore = totalScore - highestScore
     }
-    console.log('totalScore ' + totalScore)
+    
 
-    return { array: convertArray, total: totalScore, uniquePair: uniquePair }
+    return { total: totalScore, uniquePair: uniquePair }
   }
 
-  getFinalResult(multipleArray) {
+  getFinalResult(multiplePlayer) {
     let result = []
 
-    let uniqueLenght = 0
-    for (const iterator of multipleArray) {
+    let uniqueLenght = 0;
+    for (const aPlayer of multiplePlayer) {
       uniqueLenght = 0
-      const callTotalScore = Object.assign(this.getTotalScore(iterator))
-      const uniqueValue = Object.assign(callTotalScore.uniquePair)
-      console.log(uniqueValue)
-      uniqueLenght = uniqueValue.length
-      console.log(uniqueLenght)
-      const total = Object.assign(callTotalScore.total)
+      const callTotalScore = Object.assign(this.getTotalScore(aPlayer));
+      const uniqueValue = Object.assign(callTotalScore.uniquePair);
+    
+      uniqueLenght = uniqueValue.length;
+      
+      const total = Object.assign(callTotalScore.total);
       const newTotal = Object.assign(Math.floor(total / uniqueLenght))
 
       result.push([total, newTotal])
-      console.log(result)
+      
     }
     return result
   }
-  getConditionalResult(result, multipleArray) {
-    console.log('result' + result)
+  getConditionalResult(result, multiplePlayer) {
+    
     let finalResult = []
 
     if (result.length===2) {
@@ -108,11 +108,11 @@ class Poker {
 
         if (result[0][1] > result[1][1]) {
 
-          finalResult.push(multipleArray[0])
+          finalResult.push(multiplePlayer[0])
 
         } else if (result[0][1] < result[1][1]) {
 
-          finalResult.push(multipleArray[1])
+          finalResult.push(multiplePlayer[1])
         }
       }
     }
@@ -125,14 +125,14 @@ class Poker {
 
       for (let i = 0; i <= size; i++) {
         if (result[i][1] >= result[i + 1][1]) {
-          finalResult.push(multipleArray[i])
+          finalResult.push(multiplePlayer[i])
         }
         console.log('finalResult :' + finalResult)
       }
-      console.log('multipleArray' + multipleArray)
+      console.log('multiplePlayer' + multiplePlayer)
       console.log('finalResult :' + finalResult)
     }
-    console.log(finalResult)
+    
     return finalResult
   }
 }
