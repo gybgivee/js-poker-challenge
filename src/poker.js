@@ -48,14 +48,15 @@ class Poker {
         }
       }
     }
-    const uniquePair = [...new Set(result)].map(Number).length;
+    const uniquePair = [...new Set(result)].map(Number);
     console.log('uniquePair :',uniquePair);
     const totalScore = uniquePair.reduce(function (sum, score) {
       return sum + score
     }, 0);
     console.log('totalScore '+totalScore);
+    const uniquePairLength = uniquePair.length;
 
-    return { array:convertArray,total: totalScore, uniquePair: uniquePair }
+    return { array:convertArray,total: totalScore, uniquePair: uniquePairLength }
   }
   winningPairFromArray(multipleArray){
 
